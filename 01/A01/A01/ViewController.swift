@@ -42,33 +42,31 @@ class ViewController: UIViewController {
     }
     
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer){
-        // print("Long pressed!", Date())
-        
         //长按开始
         if gesture.state == .began {
-            view.addSubview(iconsContainerView)
-            
-            //获取点击的区域,坐标信息
-            let location = gesture.location(in: self.view)
-            
-            
-            //计算元素在中心位置的x偏移值
-            let centerX = (view.frame.width - iconsContainerView.frame.width) / 2
-            iconsContainerView.transform = CGAffineTransform(translationX: centerX, y: location.y)
-            iconsContainerView.alpha = 0
-            
-            //添加动画
-            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //动画信息
-                self.iconsContainerView.alpha = 1
-                self.iconsContainerView.transform = CGAffineTransform(translationX: centerX, y: location.y - self.iconsContainerView.frame.height)
-            })
-            
+            handleGestureBegan(gesture: gesture)
         }
-        //长按借宿
+        //长按结束
         else if gesture.state == .ended {
             iconsContainerView.removeFromSuperview()
         }
+    }
+    
+    @objc func handleGestureBegan(gesture: UILongPressGestureRecognizer) {
+        view.addSubview(iconsContainerView)
+        //获取点击的区域,坐标信息
+        let location = gesture.location(in: self.view)
+        //计算元素在中心位置的x偏移值
+        let centerX = (view.frame.width - iconsContainerView.frame.width) / 2
+        iconsContainerView.transform = CGAffineTransform(translationX: centerX, y: location.y)
+        iconsContainerView.alpha = 0
+        
+        //添加动画
+        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            //动画信息
+            self.iconsContainerView.alpha = 1
+            self.iconsContainerView.transform = CGAffineTransform(translationX: centerX, y: location.y - self.iconsContainerView.frame.height)
+        })
     }
     
 
