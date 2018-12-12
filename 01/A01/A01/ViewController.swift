@@ -62,7 +62,6 @@ class ViewController: UIViewController {
                 //动画信息
                 self.iconsContainerView.alpha = 1
                 self.iconsContainerView.transform = CGAffineTransform(translationX: centerX, y: location.y - self.iconsContainerView.frame.height)
-                
             })
             
         }
